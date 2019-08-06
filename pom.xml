@@ -33,7 +33,7 @@
         <mybatis.starter.version>2.1.0</mybatis.starter.version>
         <mapper.starter.version>3.3.7</mapper.starter.version>
         <druid.statrer.version>1.1.9</druid.statrer.version>
-        <mysql.version>5.1.39</mysql.version>
+        <mysql.version>8.0.13</mysql.version>
         <pageHelper.stater.version>1.2.5</pageHelper.stater.version>
         <leyou.latest.version>1.0.0-SNAPSHOT</leyou.latest.version>
         <fastDFS.client.version>1.26.1-RELEASE</fastDFS.client.version>
