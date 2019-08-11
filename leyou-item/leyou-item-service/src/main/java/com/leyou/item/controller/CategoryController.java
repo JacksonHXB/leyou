@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.leyou.item.pojo.Category;
 import com.leyou.item.service.CategoryService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * @ClassName CategoryController
  * @Description TODO
@@ -23,13 +26,14 @@ import com.leyou.item.service.CategoryService;
  **/
 @Controller
 @RequestMapping("category")
+@Api(tags = "分类相关API")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
 
-    //根据父节点的ID查询子节点
+    @ApiOperation(value = "根据父节点的ID查询子节点")
     @GetMapping("list")
     public ResponseEntity<List<Category>> queryCategoiesByPid(@RequestParam(value="pid", defaultValue = "0") Long pid){
 		if(pid == null || pid < 0 ){

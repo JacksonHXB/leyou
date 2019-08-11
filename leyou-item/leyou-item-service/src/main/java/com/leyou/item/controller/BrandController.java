@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiParam;
  */
 @Controller
 @RequestMapping("brand")
-@Api(value="品牌Controller")
+@Api(tags="品牌相关API")
 public class BrandController {
 	
 	@Autowired
