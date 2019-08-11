@@ -17,3 +17,8 @@ eureka:
     lease-expiration-duration-in-seconds: 15      # 过期时间
 mybatis:
   type-aliases-package: com.leyou.item.pojo    # 从leyou-item-interface中获取该依赖
+  
+  
+# Swagger2的配置
+swagger:
+  title: spring-boot-starter-swagger

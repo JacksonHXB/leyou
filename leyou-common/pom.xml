@@ -11,6 +11,12 @@
 
     <groupId>com.leyou.common</groupId>
     <artifactId>leyou-common</artifactId>
-
-
+    <version>1.0.1-SNAPSHOT</version>
+    <dependencies>
+    	<!-- 引入lombok -->
+   	    <dependency>
+	        <groupId>org.projectlombok</groupId>
+	       	<artifactId>lombok</artifactId>
+	    </dependency>
+    </dependencies>
 </project>

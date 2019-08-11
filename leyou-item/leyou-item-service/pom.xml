@@ -50,13 +50,6 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>2.0.2</version>
         </dependency>
-        <!-- 
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>3.3.9</version>
-        </dependency>
-         -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -70,6 +63,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+        	<groupId>com.leyou.common</groupId>
+		    <artifactId>leyou-common</artifactId>
+		    <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- swagger2 -->
+	    <dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
     </dependencies>
 </project>
 
