@@ -1,6 +1,7 @@
 package com.leyou.item.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,11 @@ public class CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
     
-    //根据父节点查询子节点
+    /**
+     * @param pid
+     * @return
+     * @Description 根据父节点查询子节点
+     */
     public List<Category> queryCategoriesByPid(Long pid){
     	Category record = new Category();
     	record.setParentId(pid);
@@ -29,6 +34,16 @@ public class CategoryService {
     }
     
     
+    
+    /**
+     * @param ids
+     * @return
+     * @Description 根据多个ID查询相应的分类名称
+     */
+    public List<String> queryNamesByIds(List<Long> ids){
+    	List<Category> categories = categoryMapper.selectByIdList(ids);   //根据多个ID查询相应的集合
+    	return categories.stream().map(category -> category.getName()).collect(Collectors.toList());
+    }
     
 }
 
