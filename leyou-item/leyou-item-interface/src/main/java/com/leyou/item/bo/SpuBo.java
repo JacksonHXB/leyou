@@ -1,6 +1,10 @@
 package com.leyou.item.bo;
 
+import java.util.List;
+
+import com.leyou.item.pojo.Sku;
 import com.leyou.item.pojo.Spu;
+import com.leyou.item.pojo.SpuDetail;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,4 +21,60 @@ public class SpuBo extends Spu{
 	
 	@ApiModelProperty("品牌名称")
 	private String bname;
+	
+	@ApiModelProperty("SPU详情")
+	private SpuDetail spuDetail;
+	
+	
+	@ApiModelProperty("SKU集合")
+	private List<Sku> skus;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

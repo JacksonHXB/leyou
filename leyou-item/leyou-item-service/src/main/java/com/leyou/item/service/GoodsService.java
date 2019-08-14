@@ -1,6 +1,7 @@
 package com.leyou.item.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,16 +9,21 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.bo.SpuBo;
 import com.leyou.item.mapper.BrandMapper;
+import com.leyou.item.mapper.SkuMapper;
 import com.leyou.item.mapper.SpuDetailMapper;
 import com.leyou.item.mapper.SpuMapper;
+import com.leyou.item.mapper.StockMapper;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.pojo.Spu;
+import com.leyou.item.pojo.SpuDetail;
+import com.leyou.item.pojo.Stock;
 
 import tk.mybatis.mapper.entity.Example;
 
@@ -34,6 +40,12 @@ public class GoodsService {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private SkuMapper skuMapper;
+	
+	@Autowired
+	private StockMapper stockMapper;
 
 	/**
 	 * @param key
@@ -76,6 +88,42 @@ public class GoodsService {
 		
 		//返回PageResult<SpuBo>
 		return new PageResult<>(pageInfo.getTotal(), spuBos);
+	}
+	
+	
+	/**
+	 * @param spuBo
+	 * @Description 新增商品
+	 */
+	@Transactional
+	public void saveGoods(SpuBo spuBo) {
+		//新增SPU
+		spuBo.setId(null);//防止客户端参数恶意注入
+		spuBo.setSaleable(true);
+		spuBo.setValid(true);
+		spuBo.setCreateTime(new Date());
+		spuBo.setLastUpdateTime(spuBo.getCreateTime());
+		spuMapper.insertSelective(spuBo);
+		
+		//新增SpuDetail
+		SpuDetail spuDetail = spuBo.getSpuDetail();
+		spuDetail.setSpuId(spuBo.getId());
+		spuDetailMapper.insertSelective(spuDetail);
+		
+		//新增SKU
+		spuBo.getSkus().forEach(sku -> {
+			//新增单条SKU
+			sku.setId(null);
+			sku.setSpuId(spuBo.getId());
+			sku.setCreateTime(new Date());
+			sku.setLastUpdateTime(sku.getCreateTime());
+			skuMapper.insertSelective(sku);
+			//新增stock
+			Stock stock = new Stock();
+			stock.setSkuId(sku.getId());
+			stock.setStock(sku.getStock());
+			stockMapper.insertSelective(stock);
+		});		
 	}
 }
 

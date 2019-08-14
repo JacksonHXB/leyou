@@ -40,12 +40,15 @@ public class SpecificationController {
 	}
 	
 	
-	@ApiOperation("根据规格参数组ID获取规格参数列表")
+	@ApiOperation("根据条件获取规格参数列表")
 	@GetMapping("params")
 	public ResponseEntity<List<SpecParam>> queryParams(
-		@ApiParam("规格参数组ID") @RequestParam("pid")Long gid
+		@ApiParam("规格参数组ID") @RequestParam(value="gid", required = false) Long gid,
+		@ApiParam("商品分类ID") @RequestParam(value="cid", required = false) Long cid,
+		@ApiParam("通用规格参数") @RequestParam(value = "generic", required = false) Boolean generic,
+		@ApiParam("搜索字段") @RequestParam(value = "searching", required = false) Boolean searching
 	){
-		List<SpecParam> params = specificationService.queryParams(gid);
+		List<SpecParam> params = specificationService.queryParams(gid, cid, generic, searching);
 		if(CollectionUtils.isEmpty(params)) {
 			return ResponseEntity.notFound().build();
 		}
