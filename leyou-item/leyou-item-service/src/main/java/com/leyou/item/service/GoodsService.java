@@ -21,6 +21,7 @@ import com.leyou.item.mapper.SpuDetailMapper;
 import com.leyou.item.mapper.SpuMapper;
 import com.leyou.item.mapper.StockMapper;
 import com.leyou.item.pojo.Brand;
+import com.leyou.item.pojo.Sku;
 import com.leyou.item.pojo.Spu;
 import com.leyou.item.pojo.SpuDetail;
 import com.leyou.item.pojo.Stock;
@@ -111,6 +112,71 @@ public class GoodsService {
 		spuDetailMapper.insertSelective(spuDetail);
 		
 		//新增SKU
+		saveSkuAndStock(spuBo);
+	}
+
+
+	/**
+	 * @param spuId
+	 * @return
+	 * @Description 根据spuid查询spudetail
+	 */
+	public SpuDetail querySpuDetailBySpuId(Long spuId) {
+		return spuDetailMapper.selectByPrimaryKey(spuId);
+	}
+
+
+	/**
+	 * @param spuId
+	 * @return
+	 * @Description 根据spuId查询sku集合,并携带库存信息
+	 */
+	public List<Sku> querySkusBySpuId(Long spuId) {
+		Sku record = new Sku();
+		record.setSpuId(spuId);
+		List<Sku> skus = skuMapper.select(record);
+		skus.forEach(sku -> {
+			Stock stock = stockMapper.selectByPrimaryKey(sku.getId());
+			sku.setStock(stock.getStock());
+		});
+		return skus;
+	}
+
+
+	/**
+	 * @param spuBo
+	 * @Description 更新商品
+	 */
+	@Transactional
+	public void updateGoods(SpuBo spuBo) {
+		//根据SPUID查询要删除的sku
+		Sku record = new Sku();
+		record.setSpuId(spuBo.getId());
+		List<Sku> skus = skuMapper.select(record);
+		skus.forEach(sku -> { //删除stock
+			stockMapper.deleteByPrimaryKey(sku.getId());
+		});
+		//根据所有的spuId删除所有的sku
+		Sku sku = new Sku();
+		sku.setSpuId(spuBo.getId());
+		skuMapper.delete(sku);
+		//新增sku和stock
+		saveSkuAndStock(spuBo);
+		//跟新spu和spuDetail
+		spuBo.setCreateTime(null);   //防止恶意更新时间
+		spuBo.setLastUpdateTime(new Date());
+		spuBo.setValid(null);
+		spuBo.setSaleable(null);
+		spuMapper.updateByPrimaryKeySelective(spuBo);
+		spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
+	}
+	
+	
+	/**
+	 * @param spuBo
+	 * @Description 新增sku并新增库存
+	 */
+	public void saveSkuAndStock(SpuBo spuBo) {
 		spuBo.getSkus().forEach(sku -> {
 			//新增单条SKU
 			sku.setId(null);
