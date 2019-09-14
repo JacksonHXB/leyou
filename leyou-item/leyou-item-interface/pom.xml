@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>leyou-item-interface</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.1-SNAPSHOT</version>
 
     <dependencies>
 <!--        依赖太重使用persistence-api依赖-->

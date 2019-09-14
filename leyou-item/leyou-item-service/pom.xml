@@ -9,19 +9,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+	
+	<groupId>com.leyou.item.service</groupId>
     <artifactId>leyou-item-service</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.5-SNAPSHOT</version>
+    
 
     <properties>
         <mybatis.starter.version>2.1.0</mybatis.starter.version>
         <mapper.starter.version>3.3.7</mapper.starter.version>
         <pageHelper.stater.version>1.2.5</pageHelper.stater.version>
+        <commons.collections.version>4.1</commons.collections.version>
     </properties>
 
     <dependencies>
+    	<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		    <version>${commons.collections.version}</version>
+		</dependency>
         <dependency>
             <groupId>com.leyou.item</groupId>
             <artifactId>leyou-item-interface</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

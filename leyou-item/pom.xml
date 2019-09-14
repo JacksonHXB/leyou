@@ -11,13 +11,15 @@
 
     <groupId>com.leyou.item</groupId>
     <artifactId>leyou-item</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.2-SNAPSHOT</version>
+    
 
 
     <modules>
         <module>leyou-item-interface</module>
         <module>leyou-item-service</module>
     </modules>
-    <packaging>pom</packaging>
 
 
 

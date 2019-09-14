@@ -34,7 +34,6 @@ public class BrandController {
 	@Autowired
 	private BrandService brandService;
 	
-	
 	@ApiOperation("根据查询条件分页并排序查询品牌信息")
 	@GetMapping("page")
 	public ResponseEntity<PageResult<Brand>> queryBrandsByPage(

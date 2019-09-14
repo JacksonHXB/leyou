@@ -11,6 +11,11 @@
 
     <groupId>com.leyou.registry</groupId>
     <artifactId>leyou-registry</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.6-SNAPSHOT</version>
+    
+    
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

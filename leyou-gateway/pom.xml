@@ -11,6 +11,8 @@
 
     <groupId>com.leyou.gateway</groupId>
     <artifactId>leyou-gateway</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.2-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
