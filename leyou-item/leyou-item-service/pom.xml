@@ -25,6 +25,11 @@
 
     <dependencies>
     	<dependency>
+			<groupId>com.purgeteam</groupId>
+			<artifactId>unified-dispose-springboot-starter</artifactId>
+			<version>0.1.1.RELEASE</version>
+		</dependency>
+    	<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-collections4</artifactId>
 		    <version>${commons.collections.version}</version>

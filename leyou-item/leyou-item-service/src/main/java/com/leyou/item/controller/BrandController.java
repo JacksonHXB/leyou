@@ -47,6 +47,7 @@ public class BrandController {
 		if(CollectionUtils.isEmpty(result.getItems())) {
 			return ResponseEntity.notFound().build();
 		}
+//		return ResponseEntity.ok(result);
 		return ResponseEntity.ok(result);
 	}
 	
